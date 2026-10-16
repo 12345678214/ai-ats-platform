@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Instrument Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --color-paper: #f4f6f5;
+  --color-surface: #ffffff;
+  --color-line: #dce3e0;
+  --color-line-soft: #ebf0ee;
+  --color-forest: #123b33;
+  --color-forest-2: #1b4d43;
+  --color-ink: #17302b;
+  --color-muted: #5c716b;
+  --color-faint: #8a9b96;
+  --color-brand: #0e7c66;
+  --color-brand-600: #0b6552;
+  --color-brand-50: #e5f4ef;
+  --color-amber: #c98a12;
+  --color-amber-50: #fcf3df;
+  --color-rose: #c4453d;
+  --color-rose-50: #fbe9e7;
+  --color-sky: #2f6aa3;
+  --color-sky-50: #e6eff8;
+  --color-violet: #6a4fb3;
+  --color-violet-50: #eeeafa;
+}
+
+@layer base {
+  html { -webkit-text-size-adjust: 100%; }
+  body { @apply bg-paper font-sans text-ink antialiased; font-feature-settings: "ss01"; }
+  h1, h2, h3, h4 { @apply font-display tracking-tight text-ink; }
+  :focus-visible { outline: 2px solid var(--color-brand); outline-offset: 2px; border-radius: 6px; }
+  ::selection { background: var(--color-brand-50); }
+  button { cursor: pointer; }
+  button:disabled { cursor: not-allowed; }
+}
+
+@layer components {
+  .card { @apply rounded-xl border border-line bg-surface; }
+  .input { @apply w-full rounded-lg border border-line bg-white px-3 py-2 text-sm text-ink placeholder:text-faint transition-colors focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20 disabled:bg-paper disabled:text-muted; }
+  .input-error { @apply border-rose focus:border-rose focus:ring-rose/20; }
+  .label { @apply mb-1.5 block text-sm font-medium text-ink; }
+  .th { @apply px-4 py-2.5 text-left text-xs font-medium text-muted; }
+  .td { @apply px-4 py-3 text-sm align-middle; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes pop { from { opacity: 0; transform: translateY(8px) scale(.98); } to { opacity: 1; transform: none; } }
+@keyframes slide-in { from { transform: translateX(24px); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes shimmer { 0% { background-position: -400px 0; } 100% { background-position: 400px 0; } }
+.skeleton { background: linear-gradient(90deg, #e9eeec 25%, #f3f6f5 37%, #e9eeec 63%); background-size: 800px 100%; animation: shimmer 1.4s infinite linear; border-radius: 8px; }
